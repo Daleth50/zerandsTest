@@ -5,10 +5,10 @@ import Navigation from "./navigation/navigation";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <NavBar></NavBar>
       <Navigation></Navigation>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 }

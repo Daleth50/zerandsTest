@@ -25,7 +25,7 @@ import appConfig from "../config/app.config";
 export default function UsersComponents() {
   const [search, setSearch] = React.useState("");
   const [working, setWorking] = React.useState(false);
-  const [results, setResults] = React.useState();
+  const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
     if (!working && search !== "") {
@@ -54,6 +54,45 @@ export default function UsersComponents() {
       });
   };
 
+  const RenderResults = () => {
+    return results.map((el) => (
+      <div className="pt-4">
+        <Card>
+          <Row>
+            <Col>
+              <Image thumbnail src={el.avatar_url} />
+            </Col>
+            <Col>
+              <Card.Body>
+                <Card.Title>
+                  <div style={{ textAlign: "end" }}>
+                    <h2>{el.login}</h2>
+                  </div>
+                </Card.Title>
+                <Card.Subtitle>
+                  <div style={{ textAlign: "end" }}>
+                    <h5>
+                      <a target={"_blank"} href={el.html_url}>
+                        {el.url}
+                      </a>
+                    </h5>
+                  </div>
+                </Card.Subtitle>
+                <Card.Text>
+                  <div style={{ textAlign: "end" }}>
+                    <div>
+                      <span style={{ paddingLeft: 2 }}>{el.bio}</span>
+                    </div>
+                  </div>
+                </Card.Text>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+    ));
+  };
+
   return (
     <Container style={{ flex: 1, padding: 15, justifyContent: "center" }}>
       <Row xs={1} md={2}>
@@ -64,7 +103,7 @@ export default function UsersComponents() {
           <Search setSearch={setSearch} placeHolder="Search for a user" />
         </Col>
       </Row>
-      {!results && (
+      {results.length === 0 && (
         <div className="pt-4">
           <Card style={{ width: "100%" }}>
             <Card.Body>
@@ -79,42 +118,7 @@ export default function UsersComponents() {
 
       {results && (
         <Row xs={1} md={2}>
-          {results.map((el) => (
-            <div className="pt-4">
-              <Card>
-                <Row>
-                  <Col>
-                    <Image thumbnail src={el.avatar_url} />
-                  </Col>
-                  <Col>
-                    <Card.Body>
-                      <Card.Title>
-                        <div style={{ textAlign: "end" }}>
-                          <h2>{el.login}</h2>
-                        </div>
-                      </Card.Title>
-                      <Card.Subtitle>
-                        <div style={{ textAlign: "end" }}>
-                          <h5>
-                            <a target={"_blank"} href={el.html_url}>
-                              {el.url}
-                            </a>
-                          </h5>
-                        </div>
-                      </Card.Subtitle>
-                      <Card.Text>
-                        <div style={{ textAlign: "end" }}>
-                          <div>
-                            <span style={{ paddingLeft: 2 }}>{el.bio}</span>
-                          </div>
-                        </div>
-                      </Card.Text>
-                    </Card.Body>
-                  </Col>
-                </Row>
-              </Card>
-            </div>
-          ))}
+          <RenderResults />
         </Row>
       )}
     </Container>
