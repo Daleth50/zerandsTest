@@ -5,11 +5,12 @@ export default function Footer() {
   return (
     <Container
       style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        height: "30px",
-        padding: "6px",
+        // position: "fixed",
+        // bottom: 0,
+        // left: 0,
+        // height: "30px",
+        // padding: "6px",
+        backgroundColor: 'white'
       }}
     >
       <div className="d-flex" style={{height: '30px'}}>
