@@ -44,7 +44,7 @@ export default function UsersComponents() {
             <Card.Subtitle>
               <div style={{ textAlign: "justify" }}>
                 <h5>
-                  <a target={"_blank"} href={el.html_url}>
+                  <a target={"_blank"}  rel="noreferrer"  href={el.html_url}>
                     {el.url}
                   </a>
                 </h5>

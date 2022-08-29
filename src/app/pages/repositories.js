@@ -40,7 +40,11 @@ export default function RepositoriesComponent(props) {
                 <h2>{el.name}</h2>
                 <h4>
                   Owner:{" "}
-                  <a target={"_blank"} href={el.owner.html_url}>
+                  <a
+                    target={"_blank"}
+                    rel="noreferrer"
+                    href={el.owner.html_url}
+                  >
                     {el.owner.login}
                   </a>
                 </h4>
@@ -49,7 +53,7 @@ export default function RepositoriesComponent(props) {
             <Card.Subtitle>
               <div style={{ textAlign: "end" }}>
                 <h5>
-                  <a target={"_blank"} href={el.html_url}>
+                  <a target={"_blank"} rel="noreferrer" href={el.html_url}>
                     {el.url}
                   </a>
                 </h5>
