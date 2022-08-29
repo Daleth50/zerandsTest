@@ -1,5 +1,5 @@
 const token = "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";
-export default config = {
+export default  {
   api: {
     url: "https://api.github.com/",
     headers: {
