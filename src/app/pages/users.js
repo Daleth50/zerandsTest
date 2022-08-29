@@ -2,7 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import Search from "../common/search/search";
-import appConfig from "../config/app.config";
+import config from "../config/app.config";
 
 export default function UsersComponents() {
   const [search, setSearch] = React.useState("");
@@ -13,9 +13,9 @@ export default function UsersComponents() {
     const getUsers = () => {
       setWorking(true);
       axios
-        .get(appConfig.api.url + "search/users", {
+        .get(config.api.url + "search/users", {
           params: { q: search },
-          headers: appConfig.api.headers,
+          headers: config.api.headers,
         })
         .then((response) => {
           setWorking(false);

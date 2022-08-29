@@ -2,7 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Search from "../common/search/search";
-import appConfig from "../config/app.config";
+import config from "../config/app.config";
 
 export default function RepositoriesComponent(props) {
   const [search, setSearch] = React.useState("");
@@ -13,9 +13,9 @@ export default function RepositoriesComponent(props) {
     const getRepos = () => {
       setWorking(true);
       axios
-        .get(appConfig.api.url + "search/repositories", {
+        .get(config.api.url + "search/repositories", {
           params: { q: search },
-          headers: appConfig.api.headers,
+          headers: config.api.headers,
         })
         .then((response) => {
           setWorking(false);
