@@ -10,26 +10,25 @@ export default function RepositoriesComponent(props) {
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
+    const getRepos = () => {
+      setWorking(true);
+      axios
+        .get(appConfig.api.url + "search/repositories", {
+          params: { q: search },
+          headers: appConfig.api.headers,
+        })
+        .then((response) => {
+          setWorking(false);
+          setResults(response.data.items);
+        })
+        .catch((error) => {
+          setWorking(false);
+        });
+    };
     if (!working) {
       getRepos();
     }
   }, [search]);
-
-  const getRepos = () => {
-    setWorking(true);
-    axios
-      .get(appConfig.api.url + "search/repositories", {
-        params: { q: search },
-        headers: appConfig.api.headers,
-      })
-      .then((response) => {
-        setWorking(false);
-        setResults(response.data.items);
-      })
-      .catch((error) => {
-        setWorking(false);
-      });
-  };
 
   const RenderResults = () => {
     return results.map((el) => (

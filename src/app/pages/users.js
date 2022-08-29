@@ -10,61 +10,54 @@ export default function UsersComponents() {
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
+    const getUsers = () => {
+      setWorking(true);
+      axios
+        .get(appConfig.api.url + "search/users", {
+          params: { q: search },
+          headers: appConfig.api.headers,
+        })
+        .then((response) => {
+          setWorking(false);
+          setResults(response.data.items);
+        })
+        .catch((error) => {
+          setWorking(false);
+        });
+    };
     if (!working) {
       getUsers();
     }
   }, [search]);
 
-  const getUsers = () => {
-    setWorking(true);
-    axios
-      .get(appConfig.api.url + "search/users", {
-        params: { q: search },
-        headers: appConfig.api.headers,
-      })
-      .then((response) => {
-        setWorking(false);
-        setResults(response.data.items);
-      })
-      .catch((error) => {
-        setWorking(false);
-      });
-  };
-
   const RenderResults = () => {
     return results.map((el) => (
       <div className="pt-4">
         <Card>
-          <Row>
-            <Col>
-              <Image thumbnail src={el.avatar_url} />
-            </Col>
-            <Col>
-              <Card.Body>
-                <Card.Title>
-                  <div style={{ textAlign: "end" }}>
-                    <h2>{el.login}</h2>
-                  </div>
-                </Card.Title>
-                <Card.Subtitle>
-                  <div style={{ textAlign: "end" }}>
-                    <h5>
-                      <a target={"_blank"} href={el.html_url}>
-                        {el.url}
-                      </a>
-                    </h5>
-                  </div>
-                </Card.Subtitle>
-                <Card.Text>
-                  <div style={{ textAlign: "end" }}>
-                    <div>
-                      <span style={{ paddingLeft: 2 }}>{el.bio}</span>
-                    </div>
-                  </div>
-                </Card.Text>
-              </Card.Body>
-            </Col>
-          </Row>
+          <Image thumbnail src={el.avatar_url} />
+          <Card.Body>
+            <Card.Title>
+              <div style={{ textAlign: "justify" }}>
+                <h2>{el.login}</h2>
+              </div>
+            </Card.Title>
+            <Card.Subtitle>
+              <div style={{ textAlign: "justify" }}>
+                <h5>
+                  <a target={"_blank"} href={el.html_url}>
+                    {el.url}
+                  </a>
+                </h5>
+              </div>
+            </Card.Subtitle>
+            <Card.Text>
+              <div style={{ textAlign: "justify" }}>
+                <div>
+                  <span style={{ paddingLeft: 2 }}>{el.bio}</span>
+                </div>
+              </div>
+            </Card.Text>
+          </Card.Body>
         </Card>
       </div>
     ));
