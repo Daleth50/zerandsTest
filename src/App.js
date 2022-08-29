@@ -1,14 +1,12 @@
 import "./App.css";
-import Footer from "./app/common/footer/footer";
 import NavBar from "./app/common/navbar/navbar";
 import Navigation from "./navigation/navigation";
 
 function App() {
   return (
-    <div className="App">
+    <div style={{height: '100%'}}>
       <NavBar></NavBar>
       <Navigation></Navigation>
-      {/* <Footer></Footer> */}
     </div>
   );
 }

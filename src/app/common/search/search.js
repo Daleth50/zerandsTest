@@ -10,7 +10,6 @@ export default function Search({ setSearch, placeHolder = "Search" }) {
   return (
     <Form
       className="d-flex"
-      onChangeCapture={({ nativeEvent: { target } }) => console.log(target.value)}
       onSubmit={handleSubmit}
     >
       <Form.Control
@@ -19,7 +18,6 @@ export default function Search({ setSearch, placeHolder = "Search" }) {
         placeholder={placeHolder}
         className="me-2"
         aria-label="search"
-        onTouchCancel={() => setSearch("")}
       />
       <Button variant="outline-success" type="submit">
         Search

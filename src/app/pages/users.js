@@ -1,24 +1,6 @@
-import {
-  faEnvelope,
-  faLocation,
-  faLocationDot,
-  faLocationPin,
-  faMailBulk,
-  faMarker,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import * as React from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Image,
-  Row,
-  Stack,
-} from "react-bootstrap";
+import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import Search from "../common/search/search";
 import appConfig from "../config/app.config";
 
@@ -28,12 +10,9 @@ export default function UsersComponents() {
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    if (!working && search !== "") {
+    if (!working) {
       getUsers();
     }
-    // if (search === "") {
-    //   setResults(null);
-    // }
   }, [search]);
 
   const getUsers = () => {
@@ -46,11 +25,9 @@ export default function UsersComponents() {
       .then((response) => {
         setWorking(false);
         setResults(response.data.items);
-        console.log(response);
       })
       .catch((error) => {
         setWorking(false);
-        console.log(error);
       });
   };
 
@@ -103,6 +80,8 @@ export default function UsersComponents() {
           <Search setSearch={setSearch} placeHolder="Search for a user" />
         </Col>
       </Row>
+
+      {/* no results */}
       {results.length === 0 && (
         <div className="pt-4">
           <Card style={{ width: "100%" }}>

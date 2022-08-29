@@ -1,24 +1,6 @@
-import {
-  faEnvelope,
-  faLocation,
-  faLocationDot,
-  faLocationPin,
-  faMailBulk,
-  faMarker,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import * as React from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Image,
-  Row,
-  Stack,
-} from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import Search from "../common/search/search";
 import appConfig from "../config/app.config";
 
@@ -28,12 +10,9 @@ export default function RepositoriesComponent(props) {
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    if (!working && search !== "") {
+    if (!working) {
       getRepos();
     }
-    // if (search === "") {
-    //   setResults(null);
-    // }
   }, [search]);
 
   const getRepos = () => {
@@ -46,11 +25,9 @@ export default function RepositoriesComponent(props) {
       .then((response) => {
         setWorking(false);
         setResults(response.data.items);
-        console.log(response);
       })
       .catch((error) => {
         setWorking(false);
-        console.log(error);
       });
   };
 
@@ -119,17 +96,18 @@ export default function RepositoriesComponent(props) {
           <h2>Repositories</h2>
         </Col>
         <Col>
-          <Search setSearch={setSearch} placeHolder="Search for a user" />
+          <Search setSearch={setSearch} placeHolder="Search for a repository" />
         </Col>
       </Row>
+
+      {/* no results */}
       {results.length === 0 && (
         <div className="pt-4">
           <Card style={{ width: "100%" }}>
             <Card.Body>
               <Card.Title>No information to display</Card.Title>
               <Card.Text>
-                When you search for a repository their info will be displayed
-                here.
+                When you search for a repository info will be displayed here.
               </Card.Text>
             </Card.Body>
           </Card>
